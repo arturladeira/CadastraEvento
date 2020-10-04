@@ -14,7 +14,7 @@
     <body>            
             <p type="text" size="10" value="<%= request.getAttribute("resposta") %>"><br>
             <p><a href="http://localhost:8080/CadastraEvento/index.html">Página Inicial</a></p>
-            <p><a href="http://localhost:8080/CadastraEvento/Query.jsp">Nova Consulta</a></p>
+            <p><a href="http://localhost:8080/CadastraEvento/query.html">Nova Consulta</a></p>
             <p><a href="http://localhost:8080/CadastraEvento/RegisterEvent.jsp">Cadastrar Evento</a></p>
     </body>
 </html>

@@ -20,10 +20,10 @@
         <p>Cidade Sede: <%= request.getParameter("city_host") %></p></br>
         <p>País Sede: <%= request.getParameter("country_host") %></p></br>
         <p><a href="http://localhost:8080/CadastraEvento/EditEdition.jsp">Editar Edição</a></p>
-        <form action="RegiterEditionServlet" method="delete">
+        <form action="RegisterEditionServlet" method="delete">
             <p><a href="http://localhost:8080/CadastraEvento/DeleteEdition.jsp">Deletar Edição</a></p>
         </form>
-        <p><a href="http://localhost:8080/CadastraEvento/RegisterEvent.jsp">Cadastrar outro Evento</a></p>
+        <p><a href="http://localhost:8080/CadastraEvento/RegisterEvent.html">Cadastrar outro Evento</a></p>
         <p><a href="http://localhost:8080/CadastraEvento/RegisterEdition.jsp">Cadastrar edição</a></p>
     </body>
 </html>

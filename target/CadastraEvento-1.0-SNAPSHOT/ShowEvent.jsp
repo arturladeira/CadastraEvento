@@ -19,10 +19,10 @@
         <p>Area de Concentração: <%= request.getParameter("area") %></p>
         <p>Instituição: <%= request.getParameter("institution") %></p></br>
         <p><a href="http://localhost:8080/CadastraEvento/EditEvent.jsp">Editar Evento</a></p>
-        <form action="RegiterEventServlet" method="delete">
+        <form action="RegisterEventServlet" method="delete">
             <p><a href="http://localhost:8080/CadastraEvento/DeleteEvent.jsp">Deletar Evento</a></p>
         </form>
-        <p><a href="http://localhost:8080/CadastraEvento/Query.jsp">Nova Consulta</a></p>
+        <p><a href="http://localhost:8080/CadastraEvento/query.html">Nova Consulta</a></p>
         <p><a href="http://localhost:8080/CadastraEvento/RegisterEdition.jsp">Cadastrar edição</a></p>
     </body>
 </html>

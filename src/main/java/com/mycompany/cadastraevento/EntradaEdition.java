@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -27,7 +28,9 @@ public class EntradaEdition implements Serializable {
     private String date_end;
     private String city_host;
     private String country_host;
-
+    @ManyToOne
+    private Entrada edition;
+    
     public Long getId() {
         return id;
     }
@@ -75,6 +78,14 @@ public class EntradaEdition implements Serializable {
 
     public void setCountryHost(String country_host) {
         this.country_host = country_host;
+    }
+    
+    public Entrada getEdition() {
+        return edition;
+    }
+
+    public void setEdition(Entrada edition) {
+        this.edition = edition;
     }
 
     @Override

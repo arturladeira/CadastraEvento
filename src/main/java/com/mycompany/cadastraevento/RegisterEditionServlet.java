@@ -8,6 +8,10 @@ package com.mycompany.cadastraevento;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -78,7 +82,7 @@ public class RegisterEditionServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         // Obtain a database connection:
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgendaPU");
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
         //EntityManager em = JPAUtil.getEM();
         JPAEntradaEditionDAO dao = new JPAEntradaEditionDAO();
 
@@ -132,7 +136,7 @@ public class RegisterEditionServlet extends HttpServlet {
         //et.begin();
         //em.persist(entrada);
         //et.commit();
-        dao.salva(entrada);
+        //dao.salva(entrada);
 
         ServletContext servcontext = request.getServletContext();
 
@@ -154,16 +158,17 @@ public class RegisterEditionServlet extends HttpServlet {
         //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
         //EntityManager em = JPAUtil.getEM();
         JPAEntradaEditionDAO dao = new JPAEntradaEditionDAO();
-
+        
+        
         String resposta = dao.delete(request.getParameter("id"));
-
+        EntradaEdition entrada = dao.searchId(request.getParameter("id"));
         request.setAttribute("resposta", resposta);
         //EntityTransaction et = em.getTransaction();
         //et.begin();
         //em.persist(entrada);
         //et.commit();
         
-        EntradaEdition entrada = dao.searchId(request.getParameter("id"));
+        
         Long id = entrada.getId();
 
         request.setAttribute("id", id);

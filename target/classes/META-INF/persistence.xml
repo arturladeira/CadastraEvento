@@ -2,13 +2,22 @@
 <persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <!-- Define Persistence Unit -->
   <persistence-unit name="EventPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/event</jta-data-source>
     <!--<jta-data-source>java:comp/env/jdbc/event</jta-data-source> -->
     <!--<class>com.mycompany.cadastraevento.Entrada</class> -->
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>com.mycompany.cadastraevento.EntradaEdition</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <class>com.mycompany.cadastraevento.Entrada</class>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+        <property name="javax.persistence.jdbc.user" value="APP"/>
+        <property name="javax.persistence.jdbc.password" value="APP"/>
+        <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/event"/>
+        <property name="serverName" value="localhost"/>
+        <property name="portNumber" value="1527"/>
+        <property name="databaseName" value="event"/>
+        <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <!-- database connection 
         <property name="javax.persistence.jdbc.driver" value="org.derby.Driver" />
         <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/event" />

@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -88,7 +89,7 @@ public class RegisterEventServlet extends HttpServlet {
 
         Entrada entrada = new Entrada();
         entrada.setName(request.getParameter("name"));
-        entrada.setInitials(request.getParameter("initils"));
+        entrada.setInitials(request.getParameter("initials"));
         entrada.setArea(request.getParameter("area"));
         entrada.setInstitution(request.getParameter("institution"));
 
@@ -126,7 +127,7 @@ public class RegisterEventServlet extends HttpServlet {
         Entrada entrada = dao.searchId(request.getParameter("id"));
 
         entrada.setName(request.getParameter("name"));
-        entrada.setInitials(request.getParameter("initils"));
+        entrada.setInitials(request.getParameter("initials"));
         entrada.setArea(request.getParameter("area"));
         entrada.setInstitution(request.getParameter("institution"));
 
@@ -156,16 +157,17 @@ public class RegisterEventServlet extends HttpServlet {
         //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
         //EntityManager em = JPAUtil.getEM();
         JPAEntradaDAO dao = new JPAEntradaDAO();
-
+        
+        
         String resposta = dao.delete(request.getParameter("id"));
-
+        Entrada entrada = dao.searchId(request.getParameter("id"));
         request.setAttribute("resposta", resposta);
         //EntityTransaction et = em.getTransaction();
         //et.begin();
         //em.persist(entrada);
         //et.commit();
         
-        Entrada entrada = dao.searchId(request.getParameter("id"));
+        
         Long id = entrada.getId();
 
         request.setAttribute("id", id);

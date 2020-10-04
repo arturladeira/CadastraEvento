@@ -59,7 +59,7 @@ public class JPAEntradaDAO {
         return e;
     }
     
-    Entrada searchId(String sid) {
+    Entrada searchId(String sid) {;
         String jpqlQuery = "SELECT e FROM Entrada e where e.id = :sn";
         em = JPAUtil.getEM();
         Query query = em.createQuery(jpqlQuery);
