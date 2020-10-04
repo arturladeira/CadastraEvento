@@ -1,0 +1,9 @@
+com\mycompany\cadastraevento\JAXRSConfiguration.class
+com\mycompany\cadastraevento\JPAEntradaDAO.class
+com\mycompany\cadastraevento\Student.class
+com\mycompany\cadastraevento\RegisterEditionServlet.class
+com\mycompany\cadastraevento\Entrada.class
+com\mycompany\cadastraevento\JPAEntradaEditionDAO.class
+com\mycompany\cadastraevento\JPAUtil.class
+com\mycompany\cadastraevento\RegisterEventServlet.class
+com\mycompany\cadastraevento\EntradaEdition.class
