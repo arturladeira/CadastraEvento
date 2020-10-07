@@ -69,7 +69,5 @@ public class JPAEntradaEditionDAO {
         em.close();
         return e;
     }
-
-    
     
 }

@@ -28,8 +28,8 @@ public class Entrada implements Serializable {
     private String initials;
     private String area;
     private String institution;
-    //@OneToMany(mappedBy="edition")
-    //private List<EntradaEdition> EntradaEditions;
+    @OneToMany(mappedBy="edition")
+    private List<EntradaEdition> entradaEditions;
 
     public Long getId() {
         return id;
@@ -71,6 +71,13 @@ public class Entrada implements Serializable {
         this.institution = institution;
     }
     
+    public List getEntradaEdition() {
+        return entradaEditions;
+    }
+
+    public void setEntradaEdition(List EntradaEditions) {
+        this.entradaEditions = entradaEditions;
+    }
 
     @Override
     public int hashCode() {

@@ -8,10 +8,10 @@ package com.mycompany.cadastraevento;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+//import javax.persistence.EntityManager;
+//import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityTransaction;
+//import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -93,6 +93,7 @@ public class RegisterEditionServlet extends HttpServlet {
         entrada.setCityHost(request.getParameter("city_host"));
         entrada.setCountryHost(request.getParameter("country_host"));
 
+       
         //EntityTransaction et = em.getTransaction();
         //et.begin();
         //em.persist(entrada);
