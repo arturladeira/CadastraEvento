@@ -19,7 +19,7 @@ class JPAUtil {
 
     public static EntityManager getEM(){
         if (emf == null) {
-            emf = Persistence.createEntityManagerFactory("EventPU");
+            emf = Persistence.createEntityManagerFactory("EventoPU");
         }
         return emf.createEntityManager();        
     }
