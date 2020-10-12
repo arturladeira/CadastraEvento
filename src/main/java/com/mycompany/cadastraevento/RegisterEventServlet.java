@@ -99,7 +99,7 @@ public class RegisterEventServlet extends HttpServlet {
         //et.commit();
         dao.salva(entrada);
 
-        Long id = entrada.getId();
+        int id = entrada.getId();
 
         request.setAttribute("id", id);
 
@@ -123,23 +123,22 @@ public class RegisterEventServlet extends HttpServlet {
         //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
         //EntityManager em = JPAUtil.getEM();
         JPAEntradaDAO dao = new JPAEntradaDAO();
+        Entrada event = new Entrada();
 
-        Entrada entrada = dao.searchId(request.getParameter("id"));
+        event = dao.recupera(Integer.parseInt(request.getParameter("idEventoEditar")));
 
-        entrada.setName(request.getParameter("name"));
-        entrada.setInitials(request.getParameter("initials"));
-        entrada.setArea(request.getParameter("area"));
-        entrada.setInstitution(request.getParameter("institution"));
+        event.setName(request.getParameter("name"));
+        event.setInitials(request.getParameter("initials"));
+        event.setArea(request.getParameter("area"));
+        event.setInstitution(request.getParameter("institution"));
 
-        //EntityTransaction et = em.getTransaction();
-        //et.begin();
-        //em.persist(entrada);
-        //et.commit();
-        dao.salva(entrada);
+        dao.merge(event);
+
+	int id = event.getId();
 
         ServletContext servcontext = request.getServletContext();
 
-        if (dao.recupera(entrada.getId()) != null) {
+        if (dao.recupera(event.getId()) != null) {
             RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowEvent.jsp");
             dispatcher.include(request, response);
         } else {
@@ -153,31 +152,16 @@ public class RegisterEventServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        // Obtain a database connection:
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
-        //EntityManager em = JPAUtil.getEM();
-        JPAEntradaDAO dao = new JPAEntradaDAO();
+        JPAEntradaDAO dao = new JPAEntradaDAO();    
         
-        
-        String resposta = dao.delete(request.getParameter("id"));
-        Entrada entrada = dao.searchId(request.getParameter("id"));
-        request.setAttribute("resposta", resposta);
-        //EntityTransaction et = em.getTransaction();
-        //et.begin();
-        //em.persist(entrada);
-        //et.commit();
-        
-        
-        Long id = entrada.getId();
-
-        request.setAttribute("id", id);
+        String resposta = dao.delete(Integer.parseInt(request.getParameter("idEventoRemover")));
         ServletContext servcontext = request.getServletContext();
         
-        if (dao.recupera(id) != null) {
-            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowErrorEvent.jsp");
+        if (resposta.equals("Evento removido com sucesso.")) {
+            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/DeleteEvent.jsp");
             dispatcher.include(request, response);
         } else {
-            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/DeleteEvent.jsp");
+            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowErrorEven.jsp");
             dispatcher.include(request, response);
         }
     }

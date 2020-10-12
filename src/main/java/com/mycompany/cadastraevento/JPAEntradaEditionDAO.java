@@ -29,7 +29,17 @@ public class JPAEntradaEditionDAO {
         em.close();
     }
     
-    EntradaEdition recupera(Long id) {
+    public EntradaEdition merge(EntradaEdition edition) {
+        em = JPAUtil.getEM();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        EntradaEdition edicaoMerge = em.merge(edition);
+        et.commit();
+        em.close();
+        return edicaoMerge;
+    }
+    
+    public EntradaEdition recupera(int id) {
         
         em = JPAUtil.getEM();
         EntityTransaction et = em.getTransaction();
@@ -40,7 +50,7 @@ public class JPAEntradaEditionDAO {
         return e;
     }
     
-    List<EntradaEdition> searchYear(String syear) {
+    public List<EntradaEdition> searchYear(String syear) {
         String jpqlQuery = "SELECT e FROM EntradaEdition e where e.year = :sn";
         em = JPAUtil.getEM();
         Query query = em.createQuery(jpqlQuery);
@@ -50,24 +60,33 @@ public class JPAEntradaEditionDAO {
         return e;
     }
     
-    String delete(String sid) {
-        String jpqlQuery = "DELETE e FROM EntradaEdition e where e.id = :sn";
-        em = JPAUtil.getEM();
-        Query query = em.createQuery(jpqlQuery);
-        query.setParameter("sn", sid);
-        em.close();
-        String resposta = "Registro deletado com sucesso!";
-        return resposta;
+    public String delete(int id) {
+	try {
+            EntradaEdition edition = this.recupera(id);
+            em = JPAUtil.getEM();
+            EntityTransaction et = em.getTransaction();
+            et.begin();
+            EntradaEdition removeRdition = em.merge(edition);
+            em.remove(removeRdition);
+            et.commit();
+            em.close();
+            return "Edição removida com sucesso.";
+        } catch (Exception e) {
+            return "A edição não pode ser removida: " + e.toString();
+        }
+
     }
     
-    EntradaEdition searchId(String sid) {
-        String jpqlQuery = "SELECT e FROM EntradaEdition e where e.id = :sn";
+    
+    
+    public EntradaEdition searchId(int id) {
         em = JPAUtil.getEM();
-        Query query = em.createQuery(jpqlQuery);
-        query.setParameter("sn", sid);
-        EntradaEdition e = (EntradaEdition) query.getResultList();
-        em.close();
-        return e;
+	EntityTransaction et = em.getTransaction();
+	et.begin();
+	EntradaEdition edition = em.find(EntradaEdition.class, id);
+	et.commit();
+	em.close();
+	return edition;
     }
     
 }

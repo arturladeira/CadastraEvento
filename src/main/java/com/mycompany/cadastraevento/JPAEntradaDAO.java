@@ -29,7 +29,7 @@ public class JPAEntradaDAO {
         em.close();
     }
     
-    Entrada recupera(Long id) {
+    public Entrada recupera(int id) {
         
         em = JPAUtil.getEM();
         EntityTransaction et = em.getTransaction();
@@ -39,17 +39,35 @@ public class JPAEntradaDAO {
         em.close();
         return e;
     }
-    String delete(String sid) {
-        String jpqlQuery = "DELETE e FROM Entrada e where e.id = :sn";
-        em = JPAUtil.getEM();
-        Query query = em.createQuery(jpqlQuery);
-        query.setParameter("sn", sid);
-        em.close();
-        String resposta = "Registro deletado com sucesso!";
-        return resposta;
+    
+    public String delete(int sid) {
+        try {
+                Entrada e = this.recupera(sid);
+                em = JPAUtil.getEM();
+                EntityTransaction et = em.getTransaction();
+                et.begin();
+                Entrada eventoRemove = em.merge(e);
+                em.remove(eventoRemove);
+                et.commit();
+                em.close();
+                return "Evento removido com sucesso.";
+        } catch (Exception e) {
+                return "O evento não pode ser removido: " + e.toString();
+        }
+       
     }
     
-    List<Entrada> searchNameEvent(String sname) {
+    public Entrada merge(Entrada e) {
+		em = JPAUtil.getEM();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		Entrada eventoMerge = em.merge(e);
+		et.commit();
+		em.close();
+		return eventoMerge;
+	}
+    
+    public List<Entrada> searchNameEvent(String sname) {
         String jpqlQuery = "SELECT e FROM Entrada e where e.name = :sn";
         em = JPAUtil.getEM();
         Query query = em.createQuery(jpqlQuery);
@@ -59,7 +77,7 @@ public class JPAEntradaDAO {
         return e;
     }
     
-    Entrada searchId(String sid) {;
+    public Entrada searchId(String sid) {;
         String jpqlQuery = "SELECT e FROM Entrada e where e.id = :sn";
         em = JPAUtil.getEM();
         Query query = em.createQuery(jpqlQuery);

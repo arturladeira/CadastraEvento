@@ -6,60 +6,92 @@
 package com.mycompany.cadastraevento;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
 /**
  *
  * @author arthur.andrade
  */
 @Entity
+@Table(name = "edicao")
 public class EntradaEdition implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String year;
-    private String date_start;
-    private String date_end;
+    private int id;
+    private int number;
+    private int year;
+    private long  date_start;
+    private long  date_end;
     private String city_host;
     private String country_host;
-    @ManyToOne
-    private Entrada edition;
     
-    public Long getId() {
+    @ManyToOne
+    @JoinColumn(name="eventoId", referencedColumnName="eventoId")
+    private Entrada event;
+    
+    public EntradaEdition() {
+	};
+
+	public EntradaEdition(int id, int number, int year, long date_start, long date_end, String city_host,
+			String paisSede, int eventoId, Entrada event) {
+		super();
+		this.id = id;
+		this.number = number;
+		this.year = year;
+		this.date_start = date_start;
+		this.date_end = date_end;
+		this.city_host = city_host;
+		this.country_host = country_host;
+
+		this.event = event;
+	}
+    
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
-    public String getYear() {
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.id = number;
+    }
+    
+    public int getYear() {
         return year;
     }
     
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public String getDateStart() {
+    public long getDateStart() {
         return date_start;
     }
     
-    public void setDateStart(String date_start) {
+    public void setDateStart(long date_start) {
         this.date_start = date_start;
     }
     
-    public String getDateEnd() {
+    public long getDateEnd() {
         return date_end;
     }
     
-    public void setDateEnd(String date_end) {
+    public void setDateEnd(long date_end) {
         this.date_end = date_end;
     }
     
@@ -80,37 +112,13 @@ public class EntradaEdition implements Serializable {
         this.country_host = country_host;
     }
     
-    public Entrada getEdition() {
-        return edition;
+    public Entrada getEvent() {
+        return event;
     }
 
-    public void setEdition(Entrada edition) {
-        this.edition = edition;
+    public void setEvent(Entrada event) {
+        this.event = event;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EntradaEdition)) {
-            return false;
-        }
-        EntradaEdition other = (EntradaEdition) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.mycompany.cadastraevento.EntradaEdition[ id=" + id + " ]";
-    }
     
 }

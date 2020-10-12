@@ -14,12 +14,13 @@
     <body>
         <h1>Preencha os campos com as informações da Edição do Evento:</h1>
         <form action="RegisterEditionServlet" method="put">
-            ID: <p type="text" block size="10" value="<%= request.getAttribute("id") %>"><br>
-            Ano: <input type="text" name="year"/><br/>
-            Data de Início: <input type="text" name="date_start"/><br/>
-            Data de Término: <input type="text" name="date_end"/><br/>
-            Cidade Sede: <input type="text" name="city_host"/><br/>
-            País Sede: <input type="text" name="country_host"/><br/>
+            ID: <p type="text" name="idEventoEditar" required /><br>
+            Número: <p type="text" name="number" required /><br>
+            Ano: <input type="text" name="year" required /><br/>
+            Data de Início: <input type="text" name="date_start" required /><br/>
+            Data de Término: <input type="text" name="date_end" required /><br/>
+            Cidade Sede: <input type="text" name="city_host" required /><br/>
+            País Sede: <input type="text" name="country_host" required /><br/>
             <input type="submit" value="Salvar"/>
         </form>
     </body>

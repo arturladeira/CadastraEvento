@@ -85,28 +85,32 @@ public class RegisterEditionServlet extends HttpServlet {
         //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
         //EntityManager em = JPAUtil.getEM();
         JPAEntradaEditionDAO dao = new JPAEntradaEditionDAO();
+        JPAEntradaDAO eventDao = new JPAEntradaDAO();
+        
+        EntradaEdition edition = new EntradaEdition();
 
-        EntradaEdition entrada = new EntradaEdition();
-        entrada.setYear(request.getParameter("year"));
-        entrada.setDateStart(request.getParameter("date_start"));
-        entrada.setDateEnd(request.getParameter("date_end"));
-        entrada.setCityHost(request.getParameter("city_host"));
-        entrada.setCountryHost(request.getParameter("country_host"));
+        edition.setNumber(Integer.parseInt(request.getParameter("number")));
+        edition.setYear(Integer.parseInt(request.getParameter("year")));
+        edition.setDateStart(Long.parseLong(request.getParameter("date_start")));
+        edition.setDateEnd(Long.parseLong(request.getParameter("date_end")));
+        edition.setCityHost(request.getParameter("city_host"));
+        edition.setCountryHost(request.getParameter("country_host"));
+        edition.setEvent(eventDao.recupera(Integer.parseInt(request.getParameter("id"))));
 
        
         //EntityTransaction et = em.getTransaction();
         //et.begin();
         //em.persist(entrada);
         //et.commit();
-        dao.salva(entrada);
+        dao.salva(edition);
 
-        Long id = entrada.getId();
+        int id = edition.getId();
 
         request.setAttribute("id", id);
 
         ServletContext servcontext = request.getServletContext();
 
-        if (dao.recupera(id) != null) {
+        if (eventDao.recupera(id) != null) {
             RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowEdition.jsp");
             dispatcher.include(request, response);
         } else {
@@ -124,24 +128,29 @@ public class RegisterEditionServlet extends HttpServlet {
         //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
         //EntityManager em = JPAUtil.getEM();
         JPAEntradaEditionDAO dao = new JPAEntradaEditionDAO();
+        JPAEntradaDAO eventDao = new JPAEntradaDAO();
+        
+        EntradaEdition edition = new EntradaEdition();
+	edition = dao.recupera(Integer.parseInt(request.getParameter("idEdicaoEditar")));
 
-        EntradaEdition entrada = dao.searchId(request.getParameter("id"));
 
-        entrada.setYear(request.getParameter("year"));
-        entrada.setDateStart(request.getParameter("date_start"));
-        entrada.setDateEnd(request.getParameter("date_end"));
-        entrada.setCityHost(request.getParameter("city_host"));
-        entrada.setCountryHost(request.getParameter("country_host"));
+        edition.setNumber(Integer.parseInt(request.getParameter("number")));
+        edition.setYear(Integer.parseInt(request.getParameter("year")));
+        edition.setDateStart(Long.parseLong(request.getParameter("date_start")));
+        edition.setDateEnd(Long.parseLong(request.getParameter("date_end")));
+        edition.setCityHost(request.getParameter("city_host"));
+        edition.setCountryHost(request.getParameter("country_host"));
+        edition.setEvent(eventDao.recupera(Integer.parseInt(request.getParameter("id"))));
+        
+        dao.merge(edition);
+        
+        int id = edition.getId();
 
-        //EntityTransaction et = em.getTransaction();
-        //et.begin();
-        //em.persist(entrada);
-        //et.commit();
-        //dao.salva(entrada);
+	request.setAttribute("id", id);
 
-        ServletContext servcontext = request.getServletContext();
+	ServletContext servcontext = request.getServletContext();
 
-        if (dao.recupera(entrada.getId()) != null) {
+        if (eventDao.recupera(edition.getId()) != null) {
             RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowEdition.jsp");
             dispatcher.include(request, response);
         } else {
@@ -155,31 +164,17 @@ public class RegisterEditionServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        // Obtain a database connection:
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventPU");
-        //EntityManager em = JPAUtil.getEM();
         JPAEntradaEditionDAO dao = new JPAEntradaEditionDAO();
+        String resposta = dao.delete(Integer.parseInt(request.getParameter("idEdicaoRemover")));
         
         
-        String resposta = dao.delete(request.getParameter("id"));
-        EntradaEdition entrada = dao.searchId(request.getParameter("id"));
-        request.setAttribute("resposta", resposta);
-        //EntityTransaction et = em.getTransaction();
-        //et.begin();
-        //em.persist(entrada);
-        //et.commit();
-        
-        
-        Long id = entrada.getId();
-
-        request.setAttribute("id", id);
         ServletContext servcontext = request.getServletContext();
         
-        if (dao.recupera(id) != null) {
-            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowErrorEdition.jsp");
+        if (resposta.equals("Edição removida com sucesso.")) {
+            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/DeleteEdition.jsp");
             dispatcher.include(request, response);
         } else {
-            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/DeleteEdition.jsp");
+            RequestDispatcher dispatcher = servcontext.getRequestDispatcher("/ShowErrorEdition.jsp");
             dispatcher.include(request, response);
         }
     }

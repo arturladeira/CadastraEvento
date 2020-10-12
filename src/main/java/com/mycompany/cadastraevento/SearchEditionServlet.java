@@ -98,6 +98,7 @@ public class SearchEditionServlet extends HttpServlet {
             Iterator<EntradaEdition> entradasAsIterator = entradas.iterator();
             while (entradasAsIterator.hasNext()) {
                 EntradaEdition ent = entradasAsIterator.next();
+                out.println("<p> *Número: " + ent.getNumber() + "\"</p>");
                 out.println("<p> *Ano: " + ent.getYear() + "\"</p>");
                 out.println("<p> *ata de Início: " + ent.getDateStart() + "\"</p>");
                 out.println("<p> *Data de Término: " + ent.getDateEnd() + "\"</p>");

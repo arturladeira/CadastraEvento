@@ -14,11 +14,11 @@
     <body>
         <h1>Preencha os campos com as informações do Evento:</h1>
         <form action="RegisterEventServlet" method="put">
-            ID: <p type="text" block size="10" value="<%= request.getAttribute("id") %>"><br>
-            Nome: <input type="text" name="name"/><br/>
-            Sigla: <input type="text" name="initials"/><br/>
-            Area de Concentração: <input type="text" name="area"/><br/>
-            Instituição: <input type="text" name="institution"/><br/>
+            ID: <p type="text" name="idEventoEditar" required /><br>
+            Nome: <input type="text" name="name" required /><br/>
+            Sigla: <input type="text" name="initials" required /><br/>
+            Area de Concentração: <input type="text" name="area" required /><br/>
+            Instituição: <input type="text" name="institution"required /><br/>
             <input type="submit" value="Salvar"/>
         </form>
     </body>

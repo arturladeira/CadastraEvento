@@ -14,6 +14,7 @@
     <body>
         <h1>Preencha os campos com as informações da Edição do Evento:</h1>
         <form action="RegisterEditionServlet" method="post">
+            Número: <input type="text" name="number"/><br/>
             Ano: <input type="text" name="year"/><br/>
             Data de Início: <input type="text" name="date_start"/><br/>
             Data de Término: <input type="text" name="date_end"/><br/>

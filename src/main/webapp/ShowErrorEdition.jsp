@@ -12,7 +12,9 @@
         <title>Edição - Página de Falha no Cadastro</title>
     </head>
     <body>
-        <h1>A seguinte entrada não foi cadastrada:</h1>        
+        <h1>A seguinte entrada não foi cadastrada:</h1>   
+        <p>Id: <%= request.getAttribute("id") %></p>
+        <p>Número <%= request.getAttribute("number") %></p>
         <p>Ano: <%= request.getParameter("year") %></p>
         <p>Data de Início: <%= request.getParameter("date_start") %></p>
         <p>Data de Término: <%= request.getParameter("date_end") %></p>

@@ -12,30 +12,48 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 /**
  *
  * @author arthur.andrade
  */
 @Entity
+@Table(name = "evento")
 public class Entrada implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String name;
     private String initials;
     private String area;
     private String institution;
+    
     @OneToMany(mappedBy="edition")
     private List<EntradaEdition> entradaEditions;
+    
+    public Entrada() {
+	};
+    
+    public Entrada(int id, String name, String initials, String area,
+			String institution, List<EntradaEdition> entradaEditions) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.initials = initials;
+		this.area = area;
+		this.institution = institution;
+		this.entradaEditions = entradaEditions;
+	}
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -75,35 +93,7 @@ public class Entrada implements Serializable {
         return entradaEditions;
     }
 
-    public void setEntradaEdition(List EntradaEditions) {
+    public void setEntradaEdition(List entradaEditions) {
         this.entradaEditions = entradaEditions;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Entrada)) {
-            return false;
-        }
-        Entrada other = (Entrada) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.mycompany.cadastraevento.Entrada[ id=" + id + " ]";
-    }
-
-    
 }
-
