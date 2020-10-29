@@ -7,8 +7,8 @@
         <property name="databaseName" value="evento"/>
         <property name="User" value="root"/>
         <property name="Password" value="root"/>
-        <property name="URL" value='jdbc:mysql://localhost:3306/evento?zeroDateTimeBehavior=convertToNull&amp;useTimeZone=true&amp;serverTimezone=UTC&amp;autoReconnect=true&amp;useSSL=false'/>
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="URL" value="jdbc:mysql://localhost:3306/evento?zeroDateTimeBehavior=convertToNull&amp;useTimeZone=true&amp;serverTimezone=UTC&amp;autoReconnect=true&amp;useSSL=false"/>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/evento" object-type="user" pool-name="mysql_evento_rootPool"/>
 </resources>

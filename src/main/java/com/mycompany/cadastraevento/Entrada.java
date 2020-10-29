@@ -7,6 +7,7 @@ package com.mycompany.cadastraevento;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,17 +23,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "evento")
 public class Entrada implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_entrada")
     private int id;
     private String name;
     private String initials;
     private String area;
     private String institution;
     
-    @OneToMany(mappedBy="edition")
+    @OneToMany(mappedBy="event")
     private List<EntradaEdition> entradaEditions;
     
     public Entrada() {
@@ -89,11 +91,11 @@ public class Entrada implements Serializable {
         this.institution = institution;
     }
     
-    public List getEntradaEdition() {
+    public List<EntradaEdition> getEntradaEditions() {
         return entradaEditions;
     }
 
-    public void setEntradaEdition(List entradaEditions) {
+    public void setEntradaEdition(List<EntradaEdition> entradaEditions) {
         this.entradaEditions = entradaEditions;
     }
 }
